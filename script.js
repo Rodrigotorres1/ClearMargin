@@ -1,19 +1,49 @@
+function alternarModo() {
+  const modo = document.getElementById("modo").value;
+  document.getElementById("inputMargem").style.display = modo === "margem" ? "block" : "none";
+  document.getElementById("inputPreco").style.display = modo === "preco" ? "block" : "none";
+  document.getElementById("resultado").innerHTML = "";
+}
+
 function calcular() {
   const custoDolar = parseFloat(document.getElementById("custoDolar").value);
   const cotacao = parseFloat(document.getElementById("cotacao").value);
-  const margem = parseFloat(document.getElementById("margem").value);
+  const modo = document.getElementById("modo").value;
 
-  if (isNaN(custoDolar) || isNaN(cotacao) || isNaN(margem)) {
-    document.getElementById("resultado").innerHTML = "Por favor, preencha todos os campos corretamente.";
+  if (isNaN(custoDolar) || isNaN(cotacao)) {
+    document.getElementById("resultado").innerHTML = "Preencha o custo e a cotação corretamente.";
     return;
   }
 
   const custoTotal = custoDolar * cotacao;
-  const precoVenda = custoTotal * (1 + margem / 100);
-  const lucro = precoVenda - custoTotal;
 
-  document.getElementById("resultado").innerHTML =
-    `<strong>Preço sugerido:</strong> R$ ${precoVenda.toFixed(2)}<br>` +
-    `<strong>Lucro estimado:</strong> R$ ${lucro.toFixed(2)}<br>` +
-    `<strong>Margem:</strong> ${margem.toFixed(2)}%`;
+  if (modo === "margem") {
+    const margem = parseFloat(document.getElementById("margem").value);
+    if (isNaN(margem)) {
+      document.getElementById("resultado").innerHTML = "Informe a margem corretamente.";
+      return;
+    }
+
+    const precoVenda = custoTotal * (1 + margem / 100);
+    const lucro = precoVenda - custoTotal;
+
+    document.getElementById("resultado").innerHTML =
+      `<strong>Preço sugerido:</strong> R$ ${precoVenda.toFixed(2)}<br>` +
+      `<strong>Lucro estimado:</strong> R$ ${lucro.toFixed(2)}<br>` +
+      `<strong>Margem:</strong> ${margem.toFixed(2)}%`;
+
+  } else if (modo === "preco") {
+    const precoVenda = parseFloat(document.getElementById("precoVenda").value);
+    if (isNaN(precoVenda)) {
+      document.getElementById("resultado").innerHTML = "Informe o preço de venda corretamente.";
+      return;
+    }
+
+    const lucro = precoVenda - custoTotal;
+    const margem = (lucro / custoTotal) * 100;
+
+    document.getElementById("resultado").innerHTML =
+      `<strong>Lucro estimado:</strong> R$ ${lucro.toFixed(2)}<br>` +
+      `<strong>Margem de lucro:</strong> ${margem.toFixed(2)}%`;
+  }
 }
