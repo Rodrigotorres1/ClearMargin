@@ -1,57 +1,66 @@
 body {
+  background-color: #f2f2f2;
   font-family: Arial, sans-serif;
-  background-color: #f3f3f3;
   text-align: center;
-  padding: 40px;
+  padding: 30px;
 }
 
 h1 {
-  background-color: #1f2a38;
+  background-color: #1c2b39;
   color: white;
-  padding: 15px;
+  padding: 15px 30px;
   border-radius: 10px;
   display: inline-block;
+  margin-bottom: 30px;
 }
 
 .container {
-  margin-top: 30px;
-  background-color: white;
-  padding: 25px;
-  border-radius: 10px;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 label {
   display: block;
-  margin: 15px 0 5px;
+  margin-top: 15px;
+  margin-bottom: 5px;
   font-weight: bold;
+  font-size: 14px;
+  text-align: left;
 }
 
 input {
   width: 100%;
   padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
   border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
 button {
   margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 18px;
-  background-color: #1f2a38;
+  width: 30%;
+  padding: 12px;
+  background-color: #1c2b39;
   color: white;
   border: none;
   border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
+  text-align: center;
+}
+
+button:hover {
+  background-color: #2e3d4c;
 }
 
 #resultado {
-  margin-top: 25px;
-  font-size: 18px;
+  margin-top: 20px;
+  font-size: 16px;
   font-weight: bold;
   color: #333;
   white-space: pre-line;

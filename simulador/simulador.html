@@ -10,14 +10,17 @@
   <h1>Simulador de Investimento</h1>
 
   <div class="container">
-    <label for="valor">Valor investido (R$):</label>
-    <input type="number" id="valor" placeholder="Ex: 1000">
+    <label for="aporteInicial">Aporte inicial (R$):</label>
+    <input type="text" id="aporteInicial" placeholder="Ex: 1.000,00">
+
+    <label for="aporteMensal">Aporte mensal (R$):</label>
+    <input type="text" id="aporteMensal" placeholder="Ex: 200,00">
 
     <label for="taxa">Taxa de juros anual (%):</label>
-    <input type="number" id="taxa" placeholder="Ex: 10">
+    <input type="text" id="taxa" placeholder="Ex: 10,00">
 
     <label for="tempo">Tempo (anos):</label>
-    <input type="number" id="tempo" placeholder="Ex: 5">
+    <input type="text" id="tempo" placeholder="Ex: 5">
 
     <button onclick="simularInvestimento()">Simular</button>
 
