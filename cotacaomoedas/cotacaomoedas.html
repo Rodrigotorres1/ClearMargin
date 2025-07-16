@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cotação de Moedas</title>
+  <link rel="stylesheet" href="cotacaomoedas.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Cotação de Moedas</h1>
+
+    <div class="cotacao-box">
+      <p><strong>Dólar Hoje:</strong> <span id="dolar-value">Carregando...</span></p>
+      <p><strong>Real Hoje:</strong> <span id="real-value">1.00</span></p>
+    </div>
+
+    <div class="conversor-box">
+      <h2>Conversor</h2>
+
+      <div class="input-group">
+        <label for="dolar">Dólar (US$)</label>
+        <input type="number" id="dolar" placeholder="Valor em dólar">
+      </div>
+
+      <div class="input-group">
+        <label for="real">Real (R$)</label>
+        <input type="number" id="real" placeholder="Valor em real">
+      </div>
+
+      <div class="buttons">
+        <button onclick="converterParaReal()">Converter para Real</button>
+        <button onclick="converterParaDolar()">Converter para Dólar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="cotacaomoedas.js"></script>
+</body>
+</html>
