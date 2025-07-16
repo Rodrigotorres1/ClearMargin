@@ -3,7 +3,7 @@ document.getElementById('btnLucro').addEventListener('click', function () {
 });
 
 document.getElementById('btnInvestimento').addEventListener('click', function () {
-  window.location.href = 'simuladorinvestimento.html';
+  window.location.href = 'simulador.html';
 });
 
 document.getElementById('btnCotacao').addEventListener('click', function () {
