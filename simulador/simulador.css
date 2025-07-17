@@ -1,67 +1,96 @@
+/* === Base geral === */
 body {
   background-color: #f2f2f2;
   font-family: Arial, sans-serif;
   text-align: center;
   padding: 30px;
+  margin: 0;
 }
 
+/* === Container principal === */
+.container {
+  background-color: #fff;
+  padding: 50px 30px;
+  border-radius: 16px;
+  max-width: 460px;
+  margin: auto;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* === Título === */
 h1 {
   background-color: #1c2b39;
   color: white;
   padding: 15px 30px;
   border-radius: 10px;
   display: inline-block;
+  font-size: 26px;
   margin-bottom: 30px;
 }
 
-.container {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  max-width: 400px;
-  margin: auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
+/* === Labels dos inputs === */
 label {
   display: block;
-  margin-top: 15px;
-  margin-bottom: 5px;
+  margin-top: 18px;
+  margin-bottom: 6px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 15px;
   text-align: left;
 }
 
+/* === Campos de entrada === */
 input {
   width: 100%;
-  padding: 10px;
+  padding: 10px 12px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 14px;
   box-sizing: border-box;
 }
 
+/* === Botão de ação === */
 button {
-  margin-top: 20px;
+  margin-top: 30px;
   width: 30%;
-  padding: 12px;
+  padding: 14px;
   background-color: #1c2b39;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  text-align: center;
+  transition: background-color 0.3s, transform 0.1s;
 }
 
 button:hover {
   background-color: #2e3d4c;
+  transform: translateY(-1px);
 }
 
+/* === Resultado exibido após simulação === */
 #resultado {
-  margin-top: 20px;
+  margin-top: 25px;
   font-size: 16px;
   font-weight: bold;
   color: #333;
   white-space: pre-line;
+}
+
+/* === Responsividade para celular === */
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 20px;
+    max-width: 90%;
+  }
+
+  h1 {
+    font-size: 22px;
+    padding: 12px 24px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 12px;
+  }
 }
