@@ -94,3 +94,31 @@ button:hover {
     padding: 12px;
   }
 }
+
+.botoes-secundarios {
+  text-align: left;
+  margin-top: 20px;
+  padding-left: 10px;
+}
+
+.botao-voltar {
+  background-color: transparent;
+  color: #1c2b39;
+  border: 2px solid #1c2b39;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.botao-voltar:hover {
+  background-color: #1c2b39;
+  color: white;
+}
+
+.botao-voltar:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(28, 43, 57, 0.3); /* sombra leve para acessibilidade */
+}
