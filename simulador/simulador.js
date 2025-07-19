@@ -49,10 +49,7 @@ function simularInvestimento() {
   let saldoPoupanca = aporteInicial;
 
   const investimentoPorAno = [saldoInvestido];
-  const inflacaoPorAno = [aporteInicial];
   const poupancaPorAno = [saldoPoupanca];
-
-  const taxaInflacao = 0.04; // 4% ao ano
 
   for (let mes = 1; mes <= meses; mes++) {
     saldoInvestido = saldoInvestido * (1 + taxaMensal) + aporteMensal;
@@ -64,13 +61,8 @@ function simularInvestimento() {
     }
   }
 
-  for (let ano = 1; ano <= tempoAnos; ano++) {
-    inflacaoPorAno.push(inflacaoPorAno[ano - 1] * (1 + taxaInflacao));
-  }
-
   localStorage.setItem("graficoInvestimento", JSON.stringify({
     investimento: investimentoPorAno,
-    inflacao: inflacaoPorAno,
     poupanca: poupancaPorAno,
     anos: tempoAnos
   }));
