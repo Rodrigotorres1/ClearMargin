@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resultado</title>
+  <link rel="stylesheet" href="calculadoralucro.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Resultado do Cálculo</h1>
+    <div id="resultado" style="margin-top: 30px;"></div>
+    <br />
+    <a href="calculadoralucro.html">
+      <button>Voltar</button>
+    </a>
+  </div>
+
+  <script>
+    const resultado = localStorage.getItem("resultadoLucro");
+    document.getElementById("resultado").innerHTML = resultado || "Nenhum resultado encontrado.";
+  </script>
+</body>
+</html>

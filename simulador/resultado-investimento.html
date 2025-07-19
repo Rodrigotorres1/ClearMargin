@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resultado da Simulação</title>
+  <link rel="stylesheet" href="simulador.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Resultado do Investimento</h1>
+    <canvas id="grafico" width="400" height="300"></canvas>
+    <br />
+    <a href="simulador.html"><button>Voltar</button></a>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const dados = JSON.parse(localStorage.getItem("graficoInvestimento"));
+
+      if (!dados) {
+        document.body.innerHTML = "<p>Dados não encontrados. Volte e preencha o formulário.</p>";
+        return;
+      }
+
+      const labels = [];
+      for (let i = 0; i <= dados.anos; i++) {
+        labels.push(`${i} ano${i === 1 ? '' : 's'}`);
+      }
+
+      const ctx = document.getElementById("grafico").getContext("2d");
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Investimento com Juros",
+              data: dados.investimento.map(v => Number(v.toFixed(2))),
+              borderWidth: 2,
+              fill: false
+            },
+            {
+              label: "Inflação Acumulada",
+              data: dados.inflacao.map(v => Number(v.toFixed(2))),
+              borderWidth: 2,
+              borderDash: [5, 5],
+              fill: false
+            },
+            {
+              label: "Poupança Sem Rendimento",
+              data: dados.poupanca.map(v => Number(v.toFixed(2))),
+              borderWidth: 2,
+              borderDash: [2, 2],
+              fill: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'top' },
+            title: { display: true, text: 'Comparativo de Crescimento do Dinheiro' }
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              ticks: {
+                callback: value => 'R$ ' + parseFloat(value).toLocaleString('pt-BR', {
+                  minimumFractionDigits: 2
+                })
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

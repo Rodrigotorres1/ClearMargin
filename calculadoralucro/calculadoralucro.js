@@ -11,7 +11,7 @@ function calcular() {
   const modo = document.getElementById("modo").value;
 
   if (isNaN(custoDolar) || isNaN(cotacao)) {
-    document.getElementById("resultado").innerHTML = "Preencha o custo e a cotação corretamente.";
+    alert("Preencha o custo e a cotação corretamente.");
     return;
   }
 
@@ -20,30 +20,36 @@ function calcular() {
   if (modo === "margem") {
     const margem = parseFloat(document.getElementById("margem").value);
     if (isNaN(margem)) {
-      document.getElementById("resultado").innerHTML = "Informe a margem corretamente.";
+      alert("Informe a margem corretamente.");
       return;
     }
 
     const precoVenda = custoTotal * (1 + margem / 100);
     const lucro = precoVenda - custoTotal;
 
-    document.getElementById("resultado").innerHTML =
+    const resultadoHTML =
       `<strong>Preço sugerido:</strong> R$ ${precoVenda.toFixed(2)}<br>` +
       `<strong>Lucro estimado:</strong> R$ ${lucro.toFixed(2)}<br>` +
       `<strong>Margem:</strong> ${margem.toFixed(2)}%`;
 
+    localStorage.setItem("resultadoLucro", resultadoHTML);
+    window.location.href = "resultado.html";
+
   } else if (modo === "preco") {
     const precoVenda = parseFloat(document.getElementById("precoVenda").value);
     if (isNaN(precoVenda)) {
-      document.getElementById("resultado").innerHTML = "Informe o preço de venda corretamente.";
+      alert("Informe o preço de venda corretamente.");
       return;
     }
 
     const lucro = precoVenda - custoTotal;
     const margem = (lucro / custoTotal) * 100;
 
-    document.getElementById("resultado").innerHTML =
+    const resultadoHTML =
       `<strong>Lucro estimado:</strong> R$ ${lucro.toFixed(2)}<br>` +
       `<strong>Margem de lucro:</strong> ${margem.toFixed(2)}%`;
+
+    localStorage.setItem("resultadoLucro", resultadoHTML);
+    window.location.href = "resultado.html";
   }
 }

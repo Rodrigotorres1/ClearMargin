@@ -34,40 +34,50 @@ function aplicarMascaraMonetaria(input) {
 function simularInvestimento() {
   const aporteInicial = desformatar(document.getElementById("aporteInicial").value);
   const aporteMensal = desformatar(document.getElementById("aporteMensal").value);
-  const taxaAnual = parseFloat(document.getElementById("taxa").value); // <-- sem máscara
-  const tempoAnos = parseFloat(document.getElementById("tempo").value); // <-- sem máscara
-
-  const resultado = document.getElementById("resultado");
+  const taxaAnual = parseFloat(document.getElementById("taxa").value);
+  const tempoAnos = parseFloat(document.getElementById("tempo").value);
 
   if (aporteInicial <= 0 || taxaAnual <= 0 || tempoAnos <= 0) {
-    resultado.textContent = "Por favor, preencha todos os campos corretamente.";
+    alert("Por favor, preencha todos os campos corretamente.");
     return;
   }
 
-  const meses = tempoAnos * 12;
   const taxaMensal = (1 + taxaAnual / 100) ** (1 / 12) - 1;
+  const meses = tempoAnos * 12;
 
-  let valorFinal = aporteInicial * Math.pow(1 + taxaMensal, meses);
+  let saldoInvestido = aporteInicial;
+  let saldoPoupanca = aporteInicial;
 
-  for (let i = 1; i <= meses; i++) {
-    valorFinal += aporteMensal * Math.pow(1 + taxaMensal, meses - i);
+  const investimentoPorAno = [saldoInvestido];
+  const inflacaoPorAno = [aporteInicial];
+  const poupancaPorAno = [saldoPoupanca];
+
+  const taxaInflacao = 0.04; // 4% ao ano
+
+  for (let mes = 1; mes <= meses; mes++) {
+    saldoInvestido = saldoInvestido * (1 + taxaMensal) + aporteMensal;
+    saldoPoupanca += aporteMensal;
+
+    if (mes % 12 === 0) {
+      investimentoPorAno.push(saldoInvestido);
+      poupancaPorAno.push(saldoPoupanca);
+    }
   }
 
-  const totalInvestido = aporteInicial + (aporteMensal * meses);
-  const rendimento = valorFinal - totalInvestido;
+  for (let ano = 1; ano <= tempoAnos; ano++) {
+    inflacaoPorAno.push(inflacaoPorAno[ano - 1] * (1 + taxaInflacao));
+  }
 
-  const formatar = valor => valor.toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL"
-  });
+  localStorage.setItem("graficoInvestimento", JSON.stringify({
+    investimento: investimentoPorAno,
+    inflacao: inflacaoPorAno,
+    poupanca: poupancaPorAno,
+    anos: tempoAnos
+  }));
 
-  resultado.textContent =
-    `Valor Final: ${formatar(valorFinal)}\n` +
-    `Total Investido: ${formatar(totalInvestido)}\n` +
-    `Rendimento: ${formatar(rendimento)}`;
+  window.location.href = "resultado-investimento.html";
 }
 
-// Aplica máscara APENAS nos campos de dinheiro
 document.addEventListener("DOMContentLoaded", () => {
   aplicarMascaraMonetaria(document.getElementById("aporteInicial"));
   aplicarMascaraMonetaria(document.getElementById("aporteMensal"));
