@@ -61,11 +61,29 @@ function simularInvestimento() {
     }
   }
 
+  // Armazena os dados do gráfico
   localStorage.setItem("graficoInvestimento", JSON.stringify({
     investimento: investimentoPorAno,
     poupanca: poupancaPorAno,
     anos: tempoAnos
   }));
+
+  // Se não houver aporte mensal, calcular a perda de poder de compra futura
+  if (aporteMensal === 0) {
+    const taxaInflacao = 0.03; // Meta contínua de inflação (3% ao ano)
+    const valorCorrigido = aporteInicial / Math.pow(1 + taxaInflacao, tempoAnos);
+    const perda = aporteInicial - valorCorrigido;
+
+    localStorage.setItem("perdaInflacao", JSON.stringify({
+      valorCorrigido,
+      perda,
+      taxaInflacao,
+      anos: tempoAnos
+    }));
+  } else {
+    // Limpa dados antigos se o usuário passou a fazer aportes
+    localStorage.removeItem("perdaInflacao");
+  }
 
   window.location.href = "resultado-investimento.html";
 }

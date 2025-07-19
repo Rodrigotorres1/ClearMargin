@@ -11,6 +11,10 @@
   <div class="container">
     <h1>Resultado do Investimento</h1>
     <canvas id="grafico" width="400" height="300"></canvas>
+
+    <!-- Aqui será exibida a perda por inflação -->
+    <div id="perdaInflacaoBox" style="margin-top: 20px;"></div>
+
     <br />
     <a href="simulador.html"><button>Voltar</button></a>
   </div>
@@ -68,6 +72,25 @@
           }
         }
       });
+
+      // Exibe o aviso de perda por inflação, se houver
+      const perda = JSON.parse(localStorage.getItem("perdaInflacao"));
+      if (perda) {
+        const box = document.getElementById("perdaInflacaoBox");
+        const valorPerda = perda.perda.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+        const valorCorrigido = perda.valorCorrigido.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+        const anos = perda.anos;
+        const taxa = (perda.taxaInflacao * 100).toFixed(1);
+
+        box.innerHTML = `
+          <p><strong>⚠️ Perda de poder de compra estimada:</strong><br>
+          Se você deixar o dinheiro parado (sem aportes), ele perderá aproximadamente <strong>R$ ${valorPerda}</strong> de valor real em ${anos} ano${anos === 1 ? '' : 's'}, considerando uma inflação de <strong>${taxa}% ao ano</strong>.
+          No fim do período, o poder de compra seria equivalente a apenas <strong>R$ ${valorCorrigido}</strong>.</p>
+          <p style="font-size: 0.9em; color: gray;">
+            <em>Fonte: Meta contínua de inflação definida pelo Conselho Monetário Nacional (CMN), vigente a partir de 2025. Indicador oficial utilizado: IPCA – Índice Nacional de Preços ao Consumidor Amplo.</em>
+          </p>
+        `;
+      }
     });
   </script>
 </body>
