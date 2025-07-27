@@ -34,6 +34,27 @@
     </div>
   </div>
 
-  <script src="cadastro.js"></script>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const nome = document.getElementById('nome').value;
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('password').value;
+
+      const resposta = await fetch('/cadastro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, email, senha })
+      });
+
+      const texto = await resposta.text();
+      alert(texto);
+
+      if (resposta.ok) {
+        window.location.href = '/login/login.html';
+      }
+    });
+  </script>
 </body>
 </html>

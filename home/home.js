@@ -12,3 +12,9 @@ document.getElementById("btnInvestimento").addEventListener("click", function ()
 document.getElementById("btnCotacao").addEventListener("click", function () {
   window.location.href = "../cotacaomoedas/cotacaomoedas.html";
 });
+
+
+// Botão: Sair e Deslogar
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  window.location.replace('/login/login.html');
+  });
