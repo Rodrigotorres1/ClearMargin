@@ -1,3 +1,8 @@
+if (localStorage.getItem("logado") !== "true") {
+  window.location.replace("/login/login.html");
+}
+
+
 // Botão: Calculadora de Lucro
 document.getElementById("btnLucro").addEventListener("click", function () {
   window.location.href = "../calculadoralucro/calculadoralucro.html";
@@ -13,8 +18,8 @@ document.getElementById("btnCotacao").addEventListener("click", function () {
   window.location.href = "../cotacaomoedas/cotacaomoedas.html";
 });
 
-
-// Botão: Sair e Deslogar
+// Botão: Sair
 document.getElementById('logoutBtn').addEventListener('click', () => {
-  window.location.replace('/login/login.html');
-  });
+  localStorage.removeItem("logado"); // limpa login
+  window.location.replace("/login/login.html"); // substitui histórico
+});

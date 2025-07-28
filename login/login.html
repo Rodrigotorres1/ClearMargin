@@ -28,26 +28,7 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
+ <script src="/login/login.js"></script>
 
-      const email = document.getElementById('username').value;
-      const senha = document.getElementById('password').value;
-
-      const resposta = await fetch('/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, senha })
-      });
-
-      const texto = await resposta.text();
-      alert(texto);
-
-      if (resposta.ok) {
-        window.location.href = '/home/home.html';
-      }
-    });
-  </script>
 </body>
 </html>

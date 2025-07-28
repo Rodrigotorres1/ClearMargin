@@ -1,3 +1,6 @@
+if (localStorage.getItem("logado") !== "true") {
+  window.location.replace("/login/login.html");
+}
 let cotacaoDolar = 0;
 
 // Buscar cotação atual do dólar

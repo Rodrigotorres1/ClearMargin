@@ -1,21 +1,27 @@
 document.getElementById("loginForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const usuario = document.getElementById("username").value;
+  const email = document.getElementById("username").value;
   const senha = document.getElementById("password").value;
 
-  fetch("http://localhost:3000/login", {
+  fetch("/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ usuario, senha })
+    body: JSON.stringify({ email, senha })
   })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        alert("Login bem-sucedido!");
-        window.location.href = "../home/home.html";
-      } else {
-        alert("Usuário ou senha inválidos.");
+    .then(response => response.text())
+    .then(texto => {
+      alert(texto);
+
+      if (texto.includes("Login bem-sucedido")) {
+        // GUARDA LOGIN
+        localStorage.setItem("logado", "true");
+        console.log("Estado salvo: ", localStorage.getItem("logado"));
+
+        // Aguarda a gravação e só depois redireciona
+        setTimeout(() => {
+          window.location.href = "/home/home.html";
+        }, 200); // pequeno delay para garantir que o navegador conclua
       }
     })
     .catch(error => {
@@ -23,3 +29,5 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
       alert("Erro no servidor. Tente novamente.");
     });
 });
+
+

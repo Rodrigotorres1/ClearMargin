@@ -1,3 +1,6 @@
+if (localStorage.getItem("logado") !== "true") {
+  window.location.replace("/login/login.html");
+}
 function alternarModo() {
   const modo = document.getElementById("modo").value;
   document.getElementById("inputMargem").style.display = modo === "margem" ? "block" : "none";
